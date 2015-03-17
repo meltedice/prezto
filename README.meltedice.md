@@ -26,9 +26,7 @@ Installation
      provided:
 
         setopt EXTENDED_GLOB
-        for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
-          ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
-        done
+        for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do; ln -snf "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"; done
 
   5. Set Zsh as your default shell:
 
