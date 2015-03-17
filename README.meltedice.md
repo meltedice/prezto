@@ -40,14 +40,15 @@ Updating
 Pull the latest changes from upstream and update submodules.
 
     git status
-    git stash
+    [ "$optional" = "" ] && git stash
     git checkout master
     git pull --rebase upstream master
-    git submodule update --init --recursive
     git push
     git checkout meltedice
     git rebase master
-    git push
+    git submodule update --init --recursive
+    git push -f
+    [ "$optional" = "" ] && git stash apply
 
 Usage
 -----
