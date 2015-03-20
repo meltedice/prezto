@@ -186,3 +186,58 @@ zstyle ':prezto:module:prompt' theme 'sorin'
 
 # Set the default session name:
 # zstyle ':prezto:module:tmux:session' name 'YOUR DEFAULT SESSION NAME'
+
+
+# -*- coding: utf-8; mode: shell-script -*-
+
+# Common environment variables for bash/zsh 
+#
+# bash:
+#   [[ -f $HOME/.envrc ]] && . $HOME/.envrc
+# zsh:
+#   [[ -f $HOME/.envrc ]] && source $HOME/.envrc
+
+export LESS=-R
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+export NLS_LANG=.UTF-8
+export LC_COLLATE="C"
+export PERL_BADLANG=0
+export SVN_EDITOR="emacs -nw"
+export GIT_EDITOR="emacs -nw"
+export GIT_PAGER='less -FRSX'
+
+alias du="du -h"
+alias df="df -h"
+alias su="su -l"
+alias la='ls -hA'
+alias lf="ls -F"
+alias ll='ls -hl'
+alias lla='ls -hlA'
+alias count-files='find . -maxdepth 1 -type d | sort | while read -r d; do printf "%5d  %s\n" `find "$d" -type f | wc -l` $d; done'
+alias count-files-du='find . -maxdepth 1 -type d | sort | while read -r d; do printf "%+7s  %7d  %s\n" `du -s "$d" | cut -f1` `find "$d" -type f | wc -l` $d; done'
+alias be='bundle exec'
+
+# Homebrew
+if [ -d "/usr/local/bin" ]; then
+  export PATH=/usr/local/sbin:/usr/local/bin:$PATH
+  if [ -d "/Applications" ]; then
+    export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+  fi
+fi
+
+if [ -f /usr/local/opt/curl-ca-bundle/share/ca-bundle.crt ]; then
+  export SSL_CERT_FILE=/usr/local/opt/curl-ca-bundle/share/ca-bundle.crt
+fi
+
+# http://xoyip.hatenablog.com/entry/2014/04/24/200613
+[[ -f $HOME/bin/bundler.sh ]] && export BUNDLER_EDITOR=~/bin/bundler.sh
+
+# Cask
+[[ -d $HOME/.cask ]] && export PATH="$HOME/.cask/bin:$PATH"
+
+# rbenv
+if [ -d "$HOME/.rbenv/bin" ]; then
+  export PATH="$HOME/.rbenv/bin:$PATH"
+  eval "$(rbenv init -)"
+fi
