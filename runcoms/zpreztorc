@@ -225,6 +225,9 @@ alias be='bundle exec'
 # Share command history between terminals
 setopt share_history
 
+# auto directory pushd that you can get dirs list by cd -[tab]
+setopt auto_pushd
+
 # Homebrew
 if [ -d "/usr/local/bin" ]; then
   export PATH=/usr/local/sbin:/usr/local/bin:$PATH
