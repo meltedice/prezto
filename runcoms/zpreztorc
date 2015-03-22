@@ -218,6 +218,10 @@ alias count-files='find . -maxdepth 1 -type d | sort | while read -r d; do print
 alias count-files-du='find . -maxdepth 1 -type d | sort | while read -r d; do printf "%+7s  %7d  %s\n" `du -s "$d" | cut -f1` `find "$d" -type f | wc -l` $d; done'
 alias be='bundle exec'
 
+# http://0xcc.net/unimag/3/
+# Share command history between terminals
+setopt share_history
+
 # Homebrew
 if [ -d "/usr/local/bin" ]; then
   export PATH=/usr/local/sbin:/usr/local/bin:$PATH
