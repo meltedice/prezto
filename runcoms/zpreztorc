@@ -207,6 +207,9 @@ export SVN_EDITOR="emacs -nw"
 export GIT_EDITOR="emacs -nw"
 export GIT_PAGER='less -FRSX'
 
+HISTSIZE=200000
+SAVEHIST=200000
+
 alias du="du -h"
 alias df="df -h"
 alias su="su -l"
