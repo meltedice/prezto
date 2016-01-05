@@ -251,3 +251,9 @@ if [ -d "$HOME/.rbenv/bin" ]; then
   export PATH="$HOME/.rbenv/bin:$PATH"
   eval "$(rbenv init -)"
 fi
+
+# Nodebrew
+# # curl -L git.io/nodebrew | perl - setup
+[[ -d $HOME/.nodebrew ]] && export PATH=$HOME/.nodebrew/current/bin:$PATH
+
+
