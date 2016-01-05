@@ -39,7 +39,8 @@ zstyle ':prezto:load' pmodule \
   'utility' \
   'completion' \
   'history-substring-search' \
-  'prompt'
+  'prompt' \
+  'git'
 
 #
 # Autosuggestions
@@ -78,6 +79,7 @@ zstyle ':prezto:module:editor' key-bindings 'emacs'
 
 # Ignore submodules when they are 'dirty', 'untracked', 'all', or 'none'.
 # zstyle ':prezto:module:git:status:ignore' submodules 'all'
+zstyle ':prezto:module:git:status:ignore' submodules 'all'
 
 #
 # GNU Utility
@@ -220,6 +222,7 @@ zstyle ':prezto:module:prompt' theme 'sorin'
 
 # Auto set the tab and window titles.
 # zstyle ':prezto:module:terminal' auto-title 'yes'
+zstyle ':prezto:module:terminal' auto-title 'yes'
 
 # Set the window title format.
 # zstyle ':prezto:module:terminal:window-title' format '%n@%m: %s'
@@ -261,6 +264,12 @@ zstyle ':prezto:module:prompt' theme 'sorin'
 #   [[ -f $HOME/.envrc ]] && . $HOME/.envrc
 # zsh:
 #   [[ -f $HOME/.envrc ]] && source $HOME/.envrc
+
+# ------------------------------------------------------------
+# meltedice's configuration
+#
+
+[[ -f $HOME/.envrc ]] && source $HOME/.envrc
 
 export LESS=-R
 export LANG=en_US.UTF-8
