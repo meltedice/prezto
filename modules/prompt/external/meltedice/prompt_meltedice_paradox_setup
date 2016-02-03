@@ -1,3 +1,4 @@
+# -*- coding: utf-8; mode: shell-script -*-
 #
 # A two-line, Powerline-inspired theme that displays contextual information.
 #
@@ -104,8 +105,7 @@ function prompt_paradox_print_elapsed_time {
     seconds=$(( end_time % 60 ))
     print -P "%B%F{yellow}>>> elapsed time ${minutes}m${seconds}s%b"
   elif (( end_time > 10 )); then
-    # print -P "%B%F{green}>>> elapsed time ${end_time}s%b"
-    print -P "%B%F{bright green}>>> elapsed time ${end_time}s%b"
+    print -P "%B%F{green}>>> elapsed time ${end_time}s%b"
   fi
 }
 
