@@ -28,11 +28,20 @@ Installation
         setopt EXTENDED_GLOB
         for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do; ln -snf "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"; done
 
-  5. Set Zsh as your default shell:
+  5. Install powerline fonts
+
+        brew reinstall --powerline --vim-powerline ricty
+        rehash
+        cp /usr/local/Cellar/ricty/3.2.4/share/fonts/Ricty*.ttf /Library/Fonts
+        % fc-cache -vf
+
+  6. Change iTerm.app preferences to use "Ricty for Powerline"
+
+  7. Set Zsh as your default shell:
 
         chsh -s /bin/zsh
 
-  6. Open a new Zsh terminal window or tab.
+  8. Open a new Zsh terminal window or tab.
 
 Updating
 --------
