@@ -249,7 +249,8 @@ setopt auto_pushd
 
 # Homebrew
 if [ -d "/usr/local/bin" ]; then
-  export PATH=/usr/local/sbin:/usr/local/bin:$PATH
+  # zprofile will do followint `export PATH=...`
+  # export PATH=/usr/local/sbin:/usr/local/bin:$PATH
   if [ -d "/Applications" ]; then
     export HOMEBREW_CASK_OPTS="--appdir=/Applications"
   fi
@@ -265,14 +266,20 @@ fi
 # Cask
 [[ -d $HOME/.cask ]] && export PATH="$HOME/.cask/bin:$PATH"
 
-# rbenv
-if [ -d "$HOME/.rbenv/bin" ]; then
-  export PATH="$HOME/.rbenv/bin:$PATH"
-  eval "$(rbenv init -)"
+# modules/ruby/init.zsh will do following:
+# # rbenv
+# if [ -d "$HOME/.rbenv/bin" ]; then
+#   export PATH="$HOME/.rbenv/bin:$PATH"
+#   eval "$(rbenv init -)"
+# fi
+
+if which nodenv > /dev/null; then
+  # Nodenv
+  # if which nodenv > /dev/null; then eval "$(nodenv init -)"; fi
+  eval "$(nodenv init -)"
+elif [ -d $HOME/.nodebrew ]; then
+  # Nodebrew
+  # curl -L git.io/nodebrew | perl - setup
+  # [[ -d $HOME/.nodebrew ]] && export PATH=$HOME/.nodebrew/current/bin:$PATH
+  export PATH=$HOME/.nodebrew/current/bin:$PATH
 fi
-
-# Nodebrew
-# # curl -L git.io/nodebrew | perl - setup
-[[ -d $HOME/.nodebrew ]] && export PATH=$HOME/.nodebrew/current/bin:$PATH
-
-
