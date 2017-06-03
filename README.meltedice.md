@@ -13,7 +13,7 @@ Installation
 
   2. Clone my repository:
 
-        git clone --recursive git@github.com/meltedice/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+        git clone --recursive git@github.com:meltedice/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
 
   3. Set [upstream](https://github.com/sorin-ionescu/prezto) and switch to my branch [meltedice](https://github.com/sorin-ionescu/prezto.git):
 
@@ -52,12 +52,18 @@ Pull the latest changes from upstream and update submodules.
     [ "$optional" = "" ] && git stash
     git checkout master
     git pull --rebase upstream master
+    git submodule update
     git push
     git checkout meltedice
     git rebase master
     git submodule update --init --recursive
     git push -f
     [ "$optional" = "" ] && git stash apply
+
+When submodules are something in wrong state:
+
+    rm -rf path-to-submodule
+    git checkout .
 
 Usage
 -----
