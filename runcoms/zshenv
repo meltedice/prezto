@@ -10,5 +10,23 @@ if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprofile"
 fi
 
+if which direnv > /dev/null; then eval "$(direnv hook zsh)"; fi
+
 #export PATH="$HOME/.rbenv/bin:$PATH"
 #if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+
+if which nodenv > /dev/null; then
+  # Nodenv
+  # if which nodenv > /dev/null; then eval "$(nodenv init -)"; fi
+  eval "$(nodenv init -)"
+  export PATH=$PATH:`npm bin -g`
+elif [ -d $HOME/.nodebrew ]; then
+  # Nodebrew
+  # curl -L git.io/nodebrew | perl - setup
+  # [[ -d $HOME/.nodebrew ]] && export PATH=$HOME/.nodebrew/current/bin:$PATH
+  export PATH=$HOME/.nodebrew/current/bin:$PATH
+fi
+
+# if which npm > /dev/null; then
+#   export PATH=$PATH:`npm bin -g`
+# fi

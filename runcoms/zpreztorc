@@ -264,8 +264,8 @@ fi
 # http://xoyip.hatenablog.com/entry/2014/04/24/200613
 [[ -f $HOME/bin/bundler.sh ]] && export BUNDLER_EDITOR=~/bin/bundler.sh
 
-# Cask
-[[ -d $HOME/.cask ]] && export PATH="$HOME/.cask/bin:$PATH"
+# # Cask
+# [[ -d $HOME/.cask ]] && export PATH="$HOME/.cask/bin:$PATH"
 
 # modules/ruby/init.zsh will do following:
 # # rbenv
@@ -273,14 +273,3 @@ fi
 #   export PATH="$HOME/.rbenv/bin:$PATH"
 #   eval "$(rbenv init -)"
 # fi
-
-if which nodenv > /dev/null; then
-  # Nodenv
-  # if which nodenv > /dev/null; then eval "$(nodenv init -)"; fi
-  eval "$(nodenv init -)"
-elif [ -d $HOME/.nodebrew ]; then
-  # Nodebrew
-  # curl -L git.io/nodebrew | perl - setup
-  # [[ -d $HOME/.nodebrew ]] && export PATH=$HOME/.nodebrew/current/bin:$PATH
-  export PATH=$HOME/.nodebrew/current/bin:$PATH
-fi
