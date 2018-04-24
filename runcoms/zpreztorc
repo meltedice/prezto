@@ -248,15 +248,6 @@ setopt share_history
 # auto directory pushd that you can get dirs list by cd -[tab]
 setopt auto_pushd
 
-# Homebrew
-if [ -d "/usr/local/bin" ]; then
-  # zprofile will do followint `export PATH=...`
-  # export PATH=/usr/local/sbin:/usr/local/bin:$PATH
-  if [ -d "/Applications" ]; then
-    export HOMEBREW_CASK_OPTS="--appdir=/Applications"
-  fi
-fi
-
 if [ -f /usr/local/opt/curl-ca-bundle/share/ca-bundle.crt ]; then
   export SSL_CERT_FILE=/usr/local/opt/curl-ca-bundle/share/ca-bundle.crt
 fi
