@@ -40,8 +40,8 @@ zstyle ':prezto:load' pmodule \
   'utility' \
   'completion' \
   'history-substring-search' \
-  'prompt' \
-  'git'
+  'prompt'
+  # 'git'
   # 'node'
 
 #
