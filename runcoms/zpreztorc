@@ -211,8 +211,10 @@ export LC_ALL=en_US.UTF-8
 export NLS_LANG=.UTF-8
 export LC_COLLATE="C"
 export PERL_BADLANG=0
-export SVN_EDITOR="emacs -nw"
-export GIT_EDITOR="emacs -nw"
+# export SVN_EDITOR="emacs -nw"
+# export GIT_EDITOR="emacs -nw"
+export SVN_EDITOR="vi"
+export GIT_EDITOR="vi"
 export GIT_PAGER='less -FRSX'
 
 HISTSIZE=200000
@@ -264,3 +266,5 @@ fi
 #   export PATH="$HOME/.rbenv/bin:$PATH"
 #   eval "$(rbenv init -)"
 # fi
+
+[[ -f /usr/local/bin/pyenv ]] && eval "$(pyenv init -)"
