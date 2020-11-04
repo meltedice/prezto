@@ -33,8 +33,8 @@ zstyle ':prezto:load' pmodule \
   'spectrum' \
   'utility' \
   'completion' \
-  'prompt'
-  # 'git'
+  'prompt' \
+  'git'
   # 'node'
 
 #
@@ -64,6 +64,7 @@ zstyle ':prezto:module:editor' key-bindings 'emacs'
 # Ignore submodules when they are 'dirty', 'untracked', 'all', or 'none'.
 # zstyle ':prezto:module:git:status:ignore' submodules 'all'
 zstyle ':prezto:module:git:status:ignore' submodules 'all'
+zstyle ':prezto:module:git:alias' skip 'yes'
 
 #
 # GNU Utility
@@ -219,6 +220,8 @@ export GIT_PAGER='less -FRSX'
 
 HISTSIZE=200000
 SAVEHIST=200000
+
+alias e2="emacs -q --load ${HOME}/.emacs.d.2/init.el --debug-init"
 
 alias du="du -h"
 alias df="df -h"
