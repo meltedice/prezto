@@ -14,17 +14,47 @@ fi
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-# tabtab source for serverless package
-# uninstall by removing these lines or running `tabtab uninstall serverless`
-[[ -f /Users/ice/cm/guts-man/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/ice/cm/guts-man/node_modules/tabtab/.completions/serverless.zsh
-# tabtab source for sls package
-# uninstall by removing these lines or running `tabtab uninstall sls`
-[[ -f /Users/ice/cm/guts-man/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/ice/cm/guts-man/node_modules/tabtab/.completions/sls.zsh
-# tabtab source for slss package
-# uninstall by removing these lines or running `tabtab uninstall slss`
-[[ -f /Users/ice/cm/guts-man/node_modules/tabtab/.completions/slss.zsh ]] && . /Users/ice/cm/guts-man/node_modules/tabtab/.completions/slss.zsh
+# Homebrew
+if [ -d "/usr/local/bin" ]; then
+  # zprofile will also do following `export PATH=...`
+  export PATH=/usr/local/sbin:/usr/local/bin:$PATH
+  if [ -d "/Applications" ]; then
+    export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+  fi
+fi
+
+if which direnv > /dev/null; then eval "$(direnv hook zsh)"; fi
+
+[[ -f /usr/local/bin/pyenv ]] && eval "$(pyenv init -)"
+
+# rbenv
+if [ -d "$HOME/.rbenv/bin" ]; then
+  export PATH="$HOME/.rbenv/bin:$PATH"
+  if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+fi
+
+# nodenv
+if [ -d "$HOME/.nodenv/bin" ]; then
+  export PATH="$HOME/.nodenv/bin:$PATH"
+  if which nodenv > /dev/null; then
+    # if which nodenv > /dev/null; then eval "$(nodenv init -)"; fi
+    eval "$(nodenv init -)"
+    export PATH=$PATH:`npm bin -g`
+  fi
+fi
+
+# aws-cli
+if [ -d "${HOME}/aws-cli" ]; then
+  export PATH="$HOME/.nodenv/bin:$PATH:${HOME}/aws-cli"
+fi
+
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/ice/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/ice/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f "${HOME}/google-cloud-sdk/path.zsh.inc" ]; then . "${HOME}/google-cloud-sdk/path.zsh.inc"; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/ice/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/ice/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f "${HOME}/google-cloud-sdk/completion.zsh.inc" ]; then . "${HOME}/google-cloud-sdk/completion.zsh.inc"; fi
+
+# brew install mysql-client
+if [ -d "/usr/local/opt/mysql-client/bin" ]; then
+  export PATH="/usr/local/opt/mysql-client/bin:$PATH"
+fi
