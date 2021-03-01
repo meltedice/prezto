@@ -5,34 +5,10 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
-# Homebrew
-if [ -d "/usr/local/bin" ]; then
-  # zprofile will also do following `export PATH=...`
-  export PATH=/usr/local/sbin:/usr/local/bin:$PATH
-  if [ -d "/Applications" ]; then
-    export HOMEBREW_CASK_OPTS="--appdir=/Applications"
-  fi
-fi
+# Move environment variables to zshrc, if prior to /usr/bin, etc.
+
 
 # Ensure that a non-login, non-interactive shell has a defined environment.
 if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprofile"
-fi
-
-if which direnv > /dev/null; then eval "$(direnv hook zsh)"; fi
-
-# rbenv
-if [ -d "$HOME/.rbenv/bin" ]; then
-  export PATH="$HOME/.rbenv/bin:$PATH"
-  if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
-fi
-
-# nodenv
-if [ -d "$HOME/.nodenv/bin" ]; then
-  export PATH="$HOME/.nodenv/bin:$PATH"
-  if which nodenv > /dev/null; then
-    # if which nodenv > /dev/null; then eval "$(nodenv init -)"; fi
-    eval "$(nodenv init -)"
-    export PATH=$PATH:`npm bin -g`
-  fi
 fi

@@ -270,4 +270,4 @@ fi
 #   eval "$(rbenv init -)"
 # fi
 
-[[ -f /usr/local/bin/pyenv ]] && eval "$(pyenv init -)"
+# [[ -f /usr/local/bin/pyenv ]] && eval "$(pyenv init -)"
