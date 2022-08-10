@@ -58,3 +58,8 @@ if [ -f "${HOME}/google-cloud-sdk/completion.zsh.inc" ]; then . "${HOME}/google-
 if [ -d "/usr/local/opt/mysql-client/bin" ]; then
   export PATH="/usr/local/opt/mysql-client/bin:$PATH"
 fi
+
+# https://postgresapp.com/
+if [ -d "/Applications/Postgres.app/Contents/Versions/latest/bin" ]; then
+  export PATH="$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin"
+fi
