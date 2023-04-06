@@ -63,3 +63,5 @@ fi
 if [ -d "/Applications/Postgres.app/Contents/Versions/latest/bin" ]; then
   export PATH="$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin"
 fi
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
