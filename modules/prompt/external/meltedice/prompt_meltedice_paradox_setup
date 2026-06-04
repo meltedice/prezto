@@ -145,6 +145,9 @@ function prompt_meltedice_paradox_setup {
   add-zsh-hook preexec prompt_meltedice_paradox_preexec
   add-zsh-hook precmd prompt_meltedice_paradox_precmd
 
+  # Tell prezto we can manage this prompt
+  zstyle ':prezto:module:prompt' managed 'yes'
+
   # sorin's
   # # Set editor-info parameters.
   # zstyle ':prezto:module:editor:info:completing' format '%B%F{7}...%f%b'
