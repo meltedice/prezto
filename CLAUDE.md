@@ -57,6 +57,8 @@ cd modules/syntax-highlighting/external && \
   Postgres.app / 1Password CLI / cargo env など）。あとで復帰しやすくするため。
 - 追加済みツール: Rancher Desktop/Docker（`~/.rd/bin`）、awsume（`~/.local/bin`）、
   Claude Code の alias（`~/.claude/local/claude`）。
+- **fzf** は `zshrc` で `source <(fzf --zsh)` を有効化（`^T`/`^R`/`Alt-C`/Tab 補完）。
+  バイナリは Homebrew 管理（リポジトリ外）なので、別マシンでは `brew install fzf` が前提。
 
 ## 運用メモ
 
