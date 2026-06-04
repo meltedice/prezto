@@ -67,6 +67,19 @@ _prompt_meltedice_paradox_worktree_icon='⧉'
 _prompt_meltedice_paradox_worktree_bg='117'   # sky (256-color). 上のコマンドで選んだ番号/色名に変更可
 _prompt_meltedice_paradox_worktree=''
 
+# path / branch / worktree 名のフォントの太さ(ウェイト)。'%B'=太字 / ''=通常。
+# 端末テキストは「通常/太字」の2段階のみ(中間ウェイトは iTerm 側のフォント設定)。
+# 太さの確認コマンド(貼り付けると normal / bold / faint を並べて比較できる):
+#
+#   sep=$''
+#   rows=('normal (現状)||' 'bold (太字)|%B|%b' "faint (参考/より細い)|$(printf '\033[2m')|$(printf '\033[22m')")
+#   for row in $rows; do
+#     label=${row%%|*}; rest=${row#*|}; on=${rest%%|*}; off=${rest#*|}
+#     print -P "%K{magenta}%F{black} ${on}~/proj${off} %K{green}%F{magenta}${sep}%F{black} ${on}feat-login${off} %K{117}%F{green}${sep}%F{black} ${on}⧉ feat-login${off} %k%F{117}${sep}%f   ${label}"
+#   done
+#
+_prompt_meltedice_paradox_weight='%B'
+
 function prompt_meltedice_paradox_start_segment {
   local bg fg
   [[ -n "$1" ]] && bg="%K{$1}" || bg="%k"
@@ -96,15 +109,15 @@ function prompt_meltedice_paradox_build_prompt {
   # prompt_meltedice_paradox_start_segment black default '%(?::%F{red}✘ )%(!:%F{yellow}⚡ :)%(1j:%F{cyan}⚙ :)%F{magenta}%n%F{red}@%F{red}%m%f'
   # prompt_meltedice_paradox_start_segment black default '%(?::%F{red}✘ )%(!:%F{yellow}⚡ :)%(1j:%F{cyan}⚙ :)%F{1}%n%F{3}@%F{2}%m%f'
   prompt_meltedice_paradox_start_segment black default '%(?::%F{red}✘ )%(!:%F{yellow}⚡ :)%(1j:%F{cyan}⚙ :)%F{magenta}%n%F{red}@%F{red}%m%f'
-  prompt_meltedice_paradox_start_segment magenta black '$_prompt_meltedice_paradox_pwd'
+  prompt_meltedice_paradox_start_segment magenta black '${_prompt_meltedice_paradox_weight}$_prompt_meltedice_paradox_pwd%b'
 
   if [[ -n "$git_info" ]]; then
-    prompt_meltedice_paradox_start_segment green black '${(e)git_info[ref]}${(e)git_info[status]}'
+    prompt_meltedice_paradox_start_segment green black '${_prompt_meltedice_paradox_weight}${(e)git_info[ref]}%b${(e)git_info[status]}'
   fi
 
   # git worktree 内のときだけ、専用セグメント(背景 _worktree_bg / 前景 黒)で worktree 名を表示。
   if [[ -n "$_prompt_meltedice_paradox_worktree" ]]; then
-    prompt_meltedice_paradox_start_segment "$_prompt_meltedice_paradox_worktree_bg" black '${_prompt_meltedice_paradox_worktree}'
+    prompt_meltedice_paradox_start_segment "$_prompt_meltedice_paradox_worktree_bg" black '${_prompt_meltedice_paradox_weight}${_prompt_meltedice_paradox_worktree}%b'
   fi
 
   prompt_meltedice_paradox_end_segment
