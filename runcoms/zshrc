@@ -43,6 +43,9 @@ if which direnv > /dev/null; then eval "$(direnv hook zsh)"; fi
 #   fi
 # fi
 
+# Volta → .zshenv (Emacs などからも使う場合は .zshenv で設定)
+# pnpm / npm
+
 # aws-cli
 if [ -d "${HOME}/aws-cli" ]; then
   export PATH="$PATH:${HOME}/aws-cli"
@@ -98,5 +101,3 @@ fi
 #   ## SSH
 #   export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
 # fi
-export VOLTA_HOME="$HOME/.volta"
-export PATH="$VOLTA_HOME/bin:$PATH"
