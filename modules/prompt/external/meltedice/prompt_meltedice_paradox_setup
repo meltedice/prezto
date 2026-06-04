@@ -45,6 +45,28 @@ _prompt_meltedice_paradox_current_bg='NONE'
 _prompt_meltedice_paradox_segment_separator=''
 _prompt_meltedice_paradox_start_time=$SECONDS
 
+# git worktree のディレクトリにいるとき、git セグメント(緑)の右隣に
+# 専用の powerline セグメントで「<icon> <worktree名>」を表示する。
+# 前景は黒、背景は下記 _worktree_bg で指定する。
+#
+# アイコン候補(右辺を差し替えて使う):
+#   ⧉  (U+29C9) 複製された別ツリー(現在)  ⎇  (U+2387) branch 記号の定番
+#   ⋔  (U+22D4) 三又の分岐               ↳  (U+21B3) 派生・ぶら下がり
+#   ⤷  (U+2937) 派生（曲がり）           ⎈  (U+2388) 舵 = 操作中の場所
+#
+# 背景色の確認コマンド(ターミナルにそのまま貼り付けると、実際の配色で
+# 「マゼンタ(pwd) → 緑(branch) → 候補背景(worktree)」を並べて比較できる):
+#
+#   sep=$''
+#   for spec in 'yellow:yellow' 'orange:208' 'gold:220' 'azure:39' 'sky:117' 'white:white'; do
+#     label=${spec%%:*}; bg=${spec#*:}
+#     print -P "%K{magenta}%F{black} ~/proj %K{green}%F{magenta}${sep}%F{black} feat-login %K{${bg}}%F{green}${sep}%F{black} ⧉ feat-login %k%F{${bg}}${sep}%f   ${label}  ［bg=${bg}］"
+#   done
+#
+_prompt_meltedice_paradox_worktree_icon='⧉'
+_prompt_meltedice_paradox_worktree_bg='117'   # sky (256-color). 上のコマンドで選んだ番号/色名に変更可
+_prompt_meltedice_paradox_worktree=''
+
 function prompt_meltedice_paradox_start_segment {
   local bg fg
   [[ -n "$1" ]] && bg="%K{$1}" || bg="%k"
@@ -80,6 +102,11 @@ function prompt_meltedice_paradox_build_prompt {
     prompt_meltedice_paradox_start_segment green black '${(e)git_info[ref]}${(e)git_info[status]}'
   fi
 
+  # git worktree 内のときだけ、専用セグメント(背景 _worktree_bg / 前景 黒)で worktree 名を表示。
+  if [[ -n "$_prompt_meltedice_paradox_worktree" ]]; then
+    prompt_meltedice_paradox_start_segment "$_prompt_meltedice_paradox_worktree_bg" black '${_prompt_meltedice_paradox_worktree}'
+  fi
+
   prompt_meltedice_paradox_end_segment
 }
 
@@ -113,6 +140,20 @@ function prompt_meltedice_paradox_print_elapsed_time {
   fi
 }
 
+function prompt_meltedice_paradox_worktree {
+  local gitdir name
+  gitdir="$(command git rev-parse --absolute-git-dir 2>/dev/null)"
+  if [[ "$gitdir" == */worktrees/* ]]; then
+    # linked worktree のときだけ、git 管理上の worktree 名
+    # (.git/worktrees/<名前>) をブランチ名の右に表示する。
+    name="${gitdir:t}"
+    # 色や前後の余白は専用セグメント側(start_segment)が付けるので、ここは表示文字列のみ。
+    _prompt_meltedice_paradox_worktree="${_prompt_meltedice_paradox_worktree_icon} ${name//\%/%%}"
+  else
+    _prompt_meltedice_paradox_worktree=''
+  fi
+}
+
 function prompt_meltedice_paradox_precmd {
   setopt LOCAL_OPTIONS
   unsetopt XTRACE KSH_ARRAYS
@@ -124,6 +165,9 @@ function prompt_meltedice_paradox_precmd {
   if (( $+functions[git-info] )); then
     git-info
   fi
+
+  # Detect git worktree name.
+  prompt_meltedice_paradox_worktree
 
   # Calculate and print the elapsed time.
   prompt_meltedice_paradox_print_elapsed_time
