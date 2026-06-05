@@ -29,6 +29,12 @@ case ":$PATH:" in
 esac
 # pnpm end
 
+# Go
+# go 本体は Homebrew(/opt/homebrew/bin、zprofile で PATH 済み)で使える。
+# `go install` で入れたツールは ~/go/bin (既定 GOPATH/bin) に入るのでここを通す。
+# (go env GOPATH を毎回呼ぶと遅いので直書き。存在しなくても無害)
+export PATH="$HOME/go/bin:$PATH"
+
 # Forbid npm
 npm() {
   echo "❌ npm の使用は禁止しています。pnpm を使ってください。"

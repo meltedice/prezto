@@ -63,6 +63,9 @@ cd modules/syntax-highlighting/external && \
   `gwt` コマンド。本体は **submodule `modules/gwt`**（prezto モジュールではなく `pmodule` 未登録）で、
   `zshrc` から `gwt.sh` と `_gwt.zsh_completion` を source している。fzf 必須。新規 clone 時は
   `git submodule update --init --recursive` で取得すること。
+- **Go** は Homebrew 管理（`brew install go`、リポジトリ外）。本体は `/opt/homebrew/bin`（`zprofile`
+  の `brew shellenv` で PATH 済み）。`zshenv` で `~/go/bin`（既定 `GOPATH/bin`）を PATH に追加し、
+  `go install` で入れた CLI を使えるようにしている。別マシンでは `brew install go` が前提。
 
 ## 運用メモ
 
