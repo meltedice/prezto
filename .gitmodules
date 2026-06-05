@@ -32,3 +32,6 @@
 [submodule "modules/gwt"]
 	path = modules/gwt
 	url = https://github.com/gko/gwt.git
+[submodule "modules/git-worktree-switcher"]
+	path = modules/git-worktree-switcher
+	url = https://github.com/yankeexe/git-worktree-switcher.git

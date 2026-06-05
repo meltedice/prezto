@@ -63,6 +63,12 @@ cd modules/syntax-highlighting/external && \
   `gwt` コマンド。本体は **submodule `modules/gwt`**（prezto モジュールではなく `pmodule` 未登録）で、
   `zshrc` から `gwt.sh` と `_gwt.zsh_completion` を source している。fzf 必須。新規 clone 時は
   `git submodule update --init --recursive` で取得すること。
+- **wt**（[yankeexe/git-worktree-switcher](https://github.com/yankeexe/git-worktree-switcher)）は
+  タブ補完つき git worktree 切替コマンド `wt`。本体は **submodule `modules/git-worktree-switcher`**
+  の bash スクリプト（Go ではない）。`zshrc` でそのディレクトリを PATH に追加し、補完は `#compdef`
+  形式なので `fpath`+`autoload`+`compdef` で登録。`-i` の対話選択は fzf 利用。新規 clone 時は
+  `git submodule update --init --recursive` で取得。更新は `wt update`（sudo で submodule を汚す）
+  ではなく submodule 更新で行う。
 - **Go** は Homebrew 管理（`brew install go`、リポジトリ外）。本体は `/opt/homebrew/bin`（`zprofile`
   の `brew shellenv` で PATH 済み）。`zshenv` で `~/go/bin`（既定 `GOPATH/bin`）を PATH に追加し、
   `go install` で入れた CLI を使えるようにしている。別マシンでは `brew install go` が前提。
