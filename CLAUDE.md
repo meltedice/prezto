@@ -59,6 +59,10 @@ cd modules/syntax-highlighting/external && \
   Claude Code の alias（`~/.claude/local/claude`）。
 - **fzf** は `zshrc` で `source <(fzf --zsh)` を有効化（`^T`/`^R`/`Alt-C`/Tab 補完）。
   バイナリは Homebrew 管理（リポジトリ外）なので、別マシンでは `brew install fzf` が前提。
+- **gwt**（[gko/gwt](https://github.com/gko/gwt)）は git worktree を fzf で切替/作成/削除する
+  `gwt` コマンド。本体は **submodule `modules/gwt`**（prezto モジュールではなく `pmodule` 未登録）で、
+  `zshrc` から `gwt.sh` と `_gwt.zsh_completion` を source している。fzf 必須。新規 clone 時は
+  `git submodule update --init --recursive` で取得すること。
 
 ## 運用メモ
 

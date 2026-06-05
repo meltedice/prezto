@@ -29,3 +29,6 @@
 	path = modules/prompt/external/powerlevel10k
 	url = https://github.com/romkatv/powerlevel10k.git
 	shallow = true
+[submodule "modules/gwt"]
+	path = modules/gwt
+	url = https://github.com/gko/gwt.git

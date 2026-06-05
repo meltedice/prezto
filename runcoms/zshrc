@@ -108,3 +108,11 @@ fi
 if command -v fzf > /dev/null; then
   source <(fzf --zsh)
 fi
+
+# gwt (gko/gwt): fzf 連携の git worktree 切替/作成/削除コマンド `gwt`
+# 本体は submodule (modules/gwt)。fzf 必須。compinit 後に source して補完も登録する。
+if [ -f "${ZDOTDIR:-$HOME}/.zprezto/modules/gwt/gwt.sh" ]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/modules/gwt/gwt.sh"
+  [ -f "${ZDOTDIR:-$HOME}/.zprezto/modules/gwt/_gwt.zsh_completion" ] && \
+    source "${ZDOTDIR:-$HOME}/.zprezto/modules/gwt/_gwt.zsh_completion"
+fi
