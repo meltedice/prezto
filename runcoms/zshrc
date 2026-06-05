@@ -116,16 +116,3 @@ if [ -f "${ZDOTDIR:-$HOME}/.zprezto/modules/gwt/gwt.sh" ]; then
   [ -f "${ZDOTDIR:-$HOME}/.zprezto/modules/gwt/_gwt.zsh_completion" ] && \
     source "${ZDOTDIR:-$HOME}/.zprezto/modules/gwt/_gwt.zsh_completion"
 fi
-
-# wt (git-worktree-switcher): タブ補完つき git worktree 切替コマンド `wt`
-# 本体は submodule (modules/git-worktree-switcher) の bash スクリプト。
-# PATH に通すだけで動作する(cd 後 exec $SHELL で切替)。`-i` の対話選択は fzf 利用。
-# 更新は `wt update`(sudo で submodule を汚す)ではなく submodule 更新で行う。
-if [ -x "${ZDOTDIR:-$HOME}/.zprezto/modules/git-worktree-switcher/wt" ]; then
-  export PATH="${ZDOTDIR:-$HOME}/.zprezto/modules/git-worktree-switcher:$PATH"
-  # 補完は #compdef 形式(autoload 前提)なので、compinit 後に fpath+autoload+compdef で登録する。
-  if (( $+functions[compdef] )); then
-    fpath=("${ZDOTDIR:-$HOME}/.zprezto/modules/git-worktree-switcher/completions" $fpath)
-    autoload -Uz _wt_completion && compdef _wt_completion wt
-  fi
-fi
